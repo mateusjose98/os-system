@@ -7,14 +7,22 @@ import java.util.Set;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import com.mateusjose98.ossystem.dtos.UserCreateDTO;
+
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
 @Table(name = "tb_user")
 @Getter
 @Setter
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class User implements UserDetails {
 
   @Id
@@ -68,4 +76,12 @@ public class User implements UserDetails {
   public boolean isEnabled() {
     return true;
   }
+
+  public User(UserCreateDTO userCreateDTO, String encodedPassword) {
+    this.email = userCreateDTO.email();
+    this.firstName = userCreateDTO.firstName();
+    this.lastName = userCreateDTO.lastName();
+    this.password = encodedPassword;
+  }
+
 }
