@@ -1,8 +1,8 @@
 import axios from 'axios';
-const api = axios.create({
+export const api = axios.create({
   // Configuration
-  baseURL: process.env.API_BASE_URL,
-  timeout: process.env.API_TIMEOUT_MS,
+  baseURL: import.meta.env.VITE_API_BASE_URL,
+  timeout: import.meta.env.VITE_API_TIMEOUT_MS,
   headers: {
     Accept: 'application/json',
   },
