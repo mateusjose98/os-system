@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import {
   Form,
   FormGroup,
@@ -15,26 +15,29 @@ import banner from '../../assets/images/login.jpg';
 import './login.css';
 import ButtonIcon from '../../components/ButtonIcon';
 import { login } from '../../services/Auth';
+import useLocalStorage from '../../hooks/useLocalStorage';
+import { UserContext } from '../../contexts/UserContext';
 
 function LoginPage() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [sended, setSended] = useState(false);
+  const [token, setToken] = useLocalStorage('token', '');
+  const { userLogin } = useContext(UserContext);
 
   async function handleSubmit(e) {
     e.preventDefault();
-    const res = await login(username, password);
-    console.log(res.data);
+    userLogin(username, password);
   }
 
   return (
-    <div className="auth-container">
+    <div className="auth-container custom-shadow-border">
       <div className="auth-banner">
         <h1>Sistema de Ordem de Serviço</h1>
         <p>Organize chamados, gere relatórios e muito mais!</p>
         <img src={banner} alt="Image" />
       </div>
-      <div className="auth-form">
+      <div className="auth-form custom-shadow-border">
         <Form onSubmit={handleSubmit}>
           <p>Login</p>
           <FormGroup floating>

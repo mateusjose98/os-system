@@ -13,3 +13,22 @@ export async function login(username, password) {
     config,
   );
 }
+
+export async function findByUsername(username) {
+  if (!username) throw Error('Username não pode ser null');
+
+  return api.get('/api/users/username/' + username, {
+    headers: { Authorization: `Bearer ${token()}` },
+  });
+}
+
+export async function isTokenValid() {
+  return api.get('/validate-token', {
+    headers: { token: `${token()}` },
+  });
+}
+
+function token() {
+  const token = localStorage.getItem('token');
+  return token;
+}

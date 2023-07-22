@@ -37,4 +37,11 @@ public class UserController {
     return new ResponseEntity<User>(userService.findById(id), HttpStatusCode.valueOf(200));
   }
 
+  @GetMapping("username/{username}")
+  @PreAuthorize("hasRole('ROLE_ADMIN')")
+  public ResponseEntity<User> findOneByUsername(@PathVariable String username) {
+    log.info("Buscando username {}", username);
+    return new ResponseEntity<User>(userService.findByUsername(username), HttpStatusCode.valueOf(200));
+  }
+
 }

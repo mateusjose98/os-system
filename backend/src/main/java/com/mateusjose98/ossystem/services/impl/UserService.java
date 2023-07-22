@@ -41,4 +41,8 @@ public class UserService implements UserDetailsService, IUserService {
     return userRepository.findById(id).orElseThrow(() -> new IllegalArgumentException(""));
   }
 
+  public User findByUsername(String username) {
+    return userRepository.findByEmail(username).orElseThrow(() -> new IllegalArgumentException(""));
+  }
+
 }

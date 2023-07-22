@@ -4,7 +4,12 @@ import { FaAnglesRight } from 'react-icons/fa6';
 function ButtonIcon() {
   const style = { width: '100%' };
   return (
-    <Button size="lg" style={style} className="btn btn-success float-right">
+    <Button
+      type="submit"
+      size="lg"
+      style={style}
+      className="btn btn-success float-right"
+    >
       Entrar <FaAnglesRight></FaAnglesRight>{' '}
     </Button>
   );
